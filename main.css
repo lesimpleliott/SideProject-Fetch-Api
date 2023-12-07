@@ -1,0 +1,145 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #a770ef, #cf8bf3, #fdb99b);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  position: relative;
+}
+
+h1 {
+  margin-bottom: 50px;
+  -webkit-text-decoration: underline 10px;
+          text-decoration: underline 10px;
+  color: #7032c2;
+}
+
+main {
+  width: 100vw;
+  padding: 0 5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 24px;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+.card {
+  width: calc(50% - 12px);
+  height: 250px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 300ms ease-in-out;
+}
+.card h2, .card h2, .card p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card:hover {
+  transform: scale(1.05) rotate(1deg);
+}
+.card__image {
+  width: 100%;
+  height: 55%;
+  background: lightgrey;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card__content {
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.3rem;
+  padding: 0 10px;
+}
+
+.showPost {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+.showPost .postCard {
+  width: 70%;
+  height: 50vh;
+  position: sticky;
+  top: 25%;
+  left: 17%;
+  overflow-y: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 4px 4px 10px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  line-height: 1rem;
+}
+.showPost .postCard h2, .showPost .postCard p {
+  width: 100%;
+}
+.showPost .postCard p {
+  margin-bottom: 15px;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+.showPost .postCard .close {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border: solid 2px #fff;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #6c6c6c;
+  opacity: 0.5;
+  transition: all 200ms ease-in-out;
+}
+.showPost .postCard .close .line1, .showPost .postCard .close .line2 {
+  height: 3px;
+  width: 20px;
+  background: #fff;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.showPost .postCard .close .line1 {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.showPost .postCard .close .line2 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.showPost .postCard .close:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
