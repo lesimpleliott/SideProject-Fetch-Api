@@ -1,24 +1,20 @@
+// USERS
+const fetchUsers = await fetch('https://jsonplaceholder.typicode.com/users'); 
+const dataUsers = await fetchUsers.json(); 
 
-runApp();
+// PHOTOS
+const fetchPhotos = await fetch('https://jsonplaceholder.typicode.com/photos');
+const dataPhotos = await fetchPhotos.json();
 
-async function runApp() {    
-    // ON RECUPERE LES DATAS VIA L'API
-    // USERS
-    const fetchUsers = await fetch('https://jsonplaceholder.typicode.com/users'); 
-    const dataUsers = await fetchUsers.json(); 
+// POSTS
+const fetchPosts = await fetch('https://jsonplaceholder.typicode.com/posts');
+const dataPosts = await fetchPosts.json();
 
-    // PHOTOS
-    const fetchPhotos = await fetch('https://jsonplaceholder.typicode.com/photos');
-    const dataPhotos = await fetchPhotos.json();
+createUsersCard(dataUsers, dataPhotos);
+showPosts(dataPosts);
+closePopup();
 
-    // POSTS
-    const fetchPosts = await fetch('https://jsonplaceholder.typicode.com/posts');
-    const dataPosts = await fetchPosts.json();
 
-    createUsersCard(dataUsers, dataPhotos);
-    showPosts(dataPosts);
-    closePopup();
-};
 
 function createUsersCard(dataUsers, dataPhotos) {
     const mainContainer = document.querySelector('#container');
@@ -70,6 +66,9 @@ function showPosts(dataPosts) {
         cards[i].addEventListener('click', () => {
             const postsUser = dataPosts.filter(item => item.userId === i+1);
     
+            document.querySelector('body').style.overflowY = 'hidden';
+            document.querySelector('main').style.filter = 'blur(10px)';
+
             // On affiche la popup card
             const posts = document.querySelector('#posts');
             posts.classList.toggle('showPost');
@@ -89,15 +88,31 @@ function showPosts(dataPosts) {
 
 function closePopup() {
     const closeButton = document.querySelector('.close');
-    const postCard = document.querySelector('.postCard'); ///////// REFACT ? Globale ? 
-    closeButton.addEventListener('click', ()=> {
+    const posts = document.querySelector('#posts');
+    const postCard = document.querySelector('.postCard');
+    
+    document.addEventListener('click', (event)=> {
+        if(event.target === posts || event.target === closeButton) {
+            close();
+        }
+    });
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && posts.classList.contains('showPost')) {
+            close();
+        }
+    });
+    
+
+    function close() {    
+        document.querySelector('body').style.overflowY = 'auto';
+        document.querySelector('main').style.filter = 'blur(0px)';
         // On masque la popup card 
         posts.classList.toggle('showPost');
         // On efface les posts 
         const postElement = postCard.querySelectorAll('p, h2');
         postElement.forEach(element => {
-            element.remove(); 
+                element.remove(); 
         });
-    });
+    };
 };
-
